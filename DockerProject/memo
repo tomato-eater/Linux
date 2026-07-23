@@ -1,0 +1,34 @@
+スキーマ作成
+CREATE DATABASE IF NOT EXISTS ****;
+
+スキーマ切り替え
+use ****;
+
+テーブル作成
+CREATE TABLE IF NOT EXISTS ****(
+        );
+id INT PRIMARY KEY,
+id INT AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(255),
+
+
+テーブル削除
+DROP TABLE IF EXISTS ****;
+
+テーブルにデータをぶち込む
+insert into **** (x.y.z) values (x,y,z);
+
+テーブルのデータ確認
+select * from ****;
+ + where ---- = n; フィルター処理
+
+case
+when 条件 then 表示
+else 
+end as ***,
+
+between n and m n以上m以下の数値を取得
+
+
+
+docker compose exec php-apache bash

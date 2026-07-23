@@ -1,0 +1,36 @@
+
+007 ID 5 取得
+select * from users u inner join jobs j on u.job_id = j.id join battle_log l on u.id = l.user_id where u.id = 5;
+007 Lv top3
+select * from users order by level desc limit 3;
+007 指定した日のlogの回数を表示
+select create_date, count(id) from battle_log where create_date = '2025-01-05';
+007 user と job 連携して表示
+select u.id, u.name, j.id, j.name from users u inner join jobs j on u.job_id = j.id;
+007 userごとに勝利数を表示
+select u.id, sum(l.result_win)  from users u join battle_log l on u.id = l.user_id group by u.id;
+007 ジョブごとの勝利数、(idと勝利数)
+select j.id, sum(l.result_win)  from users u join jobs j on u.job_id = j.id join battle_log l on u.id = l.user_id group by j.id;
+007 日付ごとのバトル数と勝利数
+select create_date, count(id), sum(result_win) from battle_log l group by create_date;
+007 レベル帯で勝利数を集計
+select
+case
+when u.level between  1 and 10 then 'Lv 1 ~ 10'
+when u.level between 11 and 20 then 'Lv 11 ~ 20'
+when u.level between 21 and 30 then 'Lv 21 ~ 30'
+when u.level between 31 and 40 then 'Lv 31 ~ 40'
+when u.level between 41 and 50 then 'Lv 41 ~ 50'
+else 'error Lv'
+end  as Lv, 
+sum(l.result_win)
+from users u inner join battle_log l on u.id = l.user_id
+group by case 
+when u.level between  1 and 10 then 'Lv 1 ~ 10'
+when u.level between 11 and 20 then 'Lv 11 ~ 20'
+when u.level between 21 and 30 then 'Lv 21 ~ 30'
+when u.level between 31 and 40 then 'Lv 31 ~ 40'
+when u.level between 41 and 50 then 'Lv 41 ~ 50'
+else 'error Lv'
+end
+order by Min(u.level);
