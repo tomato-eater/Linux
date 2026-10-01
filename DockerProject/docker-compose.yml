@@ -54,5 +54,19 @@ services:
       - 2222:2222
     restart: unless-stopped
 
+  memcached:
+   build: ./memcached
+   container_name: memcached_cache
+   user: root
+   command: ["memcached", "-u", "root"]
+   ports: 
+      - "11211:11211"
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports: 
+      - "6379:6379"
+
 volumes:
     db_data: {}
